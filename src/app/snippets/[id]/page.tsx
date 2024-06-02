@@ -1,5 +1,10 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 interface showSnippetProps {
   params: {
@@ -14,5 +19,15 @@ export default async function showSnippet(props: any) {
   if(!snippet){
     return notFound(); 
   }
-  return <div>{snippet.title} </div>;
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {snippet.title}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
 }
