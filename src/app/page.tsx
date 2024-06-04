@@ -15,8 +15,7 @@ export default async function Home() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {ithem.title}
-                View
+                {ithem.title}View
               </Typography>
             </CardContent>
           </CardActionArea>
