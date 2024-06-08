@@ -1,24 +1,14 @@
-import { db } from "@/db";
-import { redirect } from "next/navigation";
+"use client";
+import * as actions from "@/actions";
+import { useFormState } from "react-dom";
 
 export default function newSnippetPage() {
-  async function createSnippet(formData: FormData) {
-    "use server";
-
-    const title = formData.get("title") as string;
-    const code = formData.get("code") as string;
-    const snippet = await db.snippet.create({
-      data: {
-        title,
-        code,
-      },
-    });
-    console.log(snippet);
-    redirect("/");
-  }
+  const [formState, action] = useFormState(actions.createSnippet, {
+    message: "",
+  });
 
   return (
-    <form action={createSnippet}>
+    <form action={action}>
       <h3>Create new Snippets!</h3>
       <div>
         <input
@@ -38,6 +28,7 @@ export default function newSnippetPage() {
         />
         <br />
         <br />
+        {formState.message ? <div>{formState.message}</div> : null}
         <button type="submit" className="border 4px">
           Save
         </button>

@@ -30,7 +30,6 @@ export default async function Home() {
       <Button variant="outlined" href={`/snippets/new`}>
         New
       </Button>
-
       <div>{render}</div>
     </div>
   );
