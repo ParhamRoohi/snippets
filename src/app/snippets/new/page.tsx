@@ -4,7 +4,7 @@ import { useFormState } from "react-dom";
 
 
 export default function NewSnippetPage() {
-  const [formState, action] = useFormState(actions.createSnippet, {
+  const [formState, action] = useFormState(actions.CreateSnippet, {
     message: "",
   });
 

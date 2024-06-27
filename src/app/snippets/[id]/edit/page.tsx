@@ -7,7 +7,7 @@ interface editPage {
   };
 }
 
-export default async function editPage(props: editPage) {
+export default async function EditPage(props: editPage) {
   const id = parseInt(props.params.id);
   const snippet = await db.snippet.findFirst({
     where: { id },

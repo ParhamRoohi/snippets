@@ -4,17 +4,17 @@ import Editor from "@monaco-editor/react";
 import { useState } from "react";
 import * as actions from "@/actions";
 
-interface editFormProps {
+interface EditFormProps {
   snippet: Snippet;
 }
-export default function editForm({ snippet }: editFormProps) {
+export default function EditForm({ snippet }: EditFormProps) {
   const [code, setCode] = useState(snippet.code);
 
   const handleEdit = (defaultValue: string = " ") => {
     setCode(defaultValue);
   };
 
-  const editAction = actions.editSnippet.bind(null, snippet.id, code);
+  const editAction = actions.EditSnippet.bind(null, snippet.id, code);
 
   return (
     <div>

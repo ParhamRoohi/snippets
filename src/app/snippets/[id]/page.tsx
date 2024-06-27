@@ -1,19 +1,19 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
-import * as actions from "@/actions";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Link from "next/link";
+import * as actions from '@/actions';
 
 interface showSnippetProps {
   params: {
     id: string;
   };
 }
-export default async function showSnippet(props: any) {
+export default async function showSnippet(props: showSnippetProps) {
   await new Promise((r) => setTimeout(r, 2000));
 
   const snippet = await db.snippet.findFirst({
@@ -22,7 +22,7 @@ export default async function showSnippet(props: any) {
   if (!snippet) {
     return notFound();
   }
-const deleteSnipetAction = actions.deleteSnipet.bind(null,snippet.id);
+  const deleteSnippetAction = actions.DeleteSnippet.bind(null, snippet.id);
 
   return (
     <>
@@ -37,7 +37,7 @@ const deleteSnipetAction = actions.deleteSnipet.bind(null,snippet.id);
       </Card>
       <Link href={`/snippets/${snippet.id}/edit`}>Edit</Link>
       <br />
-      <form action={deleteSnipetAction}>
+      <form action={deleteSnippetAction}>
       <button>Delete</button>
       </form>
       <div>
