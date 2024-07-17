@@ -4,6 +4,16 @@ import { grey } from "@mui/material/colors";
 import * as React from "react";
 import Button from "@mui/material/Button";
 import * as actions from "@/actions";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
+export default function SimpleAlert() {
+  return (
+    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+      Here is a gentle confirmation that your action was successful.
+    </Alert>
+  );
+}
 
 interface ClientSnippetActionsProps {
   snippetId: number;
@@ -30,18 +40,20 @@ const CustomButton = styled(Button)(({ theme }) => ({
 
 export function ClientSnippetActions({ snippetId }: ClientSnippetActionsProps) {
   const handleDelete = async () => {
+
     await actions.DeleteSnippet(snippetId);
   };
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <br />
-        <CustomButton href={`/snippets/${snippetId}/edit`}>Edit</CustomButton>
-        <br />
-        <br />
-        <CustomButton onClick={handleDelete}>Delete</CustomButton>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <br />
+      <CustomButton href={`/snippets/${snippetId}/edit`} sx={{ marginBottom: 2 }}>
+        Edit
+      </CustomButton>
+      <br />
+      <CustomButton onClick={handleDelete} sx={{ marginBottom: 2 }}>
+        Delete
+      </CustomButton>
+    </ThemeProvider>
   );
 }

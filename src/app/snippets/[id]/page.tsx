@@ -2,7 +2,6 @@ import { db } from "@/db";
 import { notFound } from "next/navigation";
 import * as React from "react";
 import Box from "@mui/material/Box";
-// import * as actions from "@/actions";
 import { ClientSnippetActions } from "@/components/ClientSnippetActions";
 
 interface showSnippetProps {
@@ -19,10 +18,6 @@ export default async function ShowSnippet(props: showSnippetProps) {
   if (!snippet) {
     return notFound();
   }
-
-  // const handleDelete = async () => {
-  //   await actions.DeleteSnippet(snippet.id);
-  // };
 
   return (
     <>
