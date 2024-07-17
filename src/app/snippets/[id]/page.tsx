@@ -1,19 +1,16 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import Link from "next/link";
-import * as actions from '@/actions';
+import Box from "@mui/material/Box";
+// import * as actions from "@/actions";
+import { ClientSnippetActions } from "@/components/ClientSnippetActions";
 
 interface showSnippetProps {
   params: {
     id: string;
   };
 }
-export default async function showSnippet(props: showSnippetProps) {
+export default async function ShowSnippet(props: showSnippetProps) {
   await new Promise((r) => setTimeout(r, 2000));
 
   const snippet = await db.snippet.findFirst({
@@ -22,27 +19,19 @@ export default async function showSnippet(props: showSnippetProps) {
   if (!snippet) {
     return notFound();
   }
-  const deleteSnippetAction = actions.DeleteSnippet.bind(null, snippet.id);
+
+  // const handleDelete = async () => {
+  //   await actions.DeleteSnippet(snippet.id);
+  // };
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {snippet.title}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <Link href={`/snippets/${snippet.id}/edit`}>Edit</Link>
-      <br />
-      <form action={deleteSnippetAction}>
-      <button>Delete</button>
-      </form>
-      <div>
-        <code>{snippet.code}</code>
-      </div>
+      <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
+        Titel: {snippet.title}
+        <br />
+        Code: {snippet.code}
+      </Box>
+      <ClientSnippetActions snippetId={snippet.id} />
     </>
-  ); 
+  );
 }

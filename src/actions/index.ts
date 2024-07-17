@@ -8,6 +8,7 @@ export async function EditSnippet(id: number, code: string) {
     where: { id },
     data: { code },
   });
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 }
 
@@ -15,9 +16,11 @@ export async function DeleteSnippet(id: number) {
   await db.snippet.delete({
     where: { id },
   });
+
   revalidatePath("/");
   redirect("/");
 }
+
 export async function CreateSnippet(
   formState: { message: string },
   formData: FormData
